@@ -1,431 +1,328 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação Premium - Imóvel Alto Padrão</title>
-    <!-- Tailwind CSS para estilização rápida e responsiva -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Montserrat para títulos (luxo) e Inter para leitura -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        gold: '#D4AF37',
-                        goldDark: '#AA8C2C',
-                        dark: '#121212',
-                        darker: '#0a0a0a'
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Reserva Exclusiva | Imóvel Alto Padrão - Centro Teresina</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            gold: '#D4AF37',
+            goldLight: '#F4E4B8',
+            neon: '#FFD700',
+            dark: '#0A0A0A',
+            darker: '#050505',
+            card: '#111111',
+          },
+          boxShadow: {
+            neon: '0 0 20px rgba(212, 175, 55, 0.4)',
+            'neon-strong': '0 0 40px rgba(212, 175, 55, 0.6)',
+          }
         }
-    </script>
-
-    <style>
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* Container do Carrossel com transição suave para mudança de formato */
-        #carousel-container {
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            margin: 0 auto;
-            border-radius: 12px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Formatos de Aspect Ratio */
-        .format-feed {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1 / 1;
-        }
-
-        .format-stories {
-            width: 100%;
-            max-width: 400px;
-            aspect-ratio: 9 / 16;
-        }
-
-        /* Track do Carrossel */
-        #carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Overlay escuro tipo gradiente para garantir leitura do texto */
-        .slide-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
-        }
-
-        /* Animações de texto */
-        .content-wrap {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease 0.3s; /* Delay para o texto entrar depois da imagem */
-        }
-        
-        .carousel-slide.active .content-wrap {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Botões de Navegação */
-        .nav-button {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(4px);
-            transition: background 0.3s, transform 0.2s;
-        }
-        .nav-button:hover {
-            background: rgba(212, 175, 55, 0.8); /* Gold hover */
-            transform: scale(1.1);
-        }
-
-        /* Indicadores (Dots) */
-        .dot {
-            transition: all 0.3s;
-            width: 8px;
-            height: 8px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .dot.active {
-            background: #D4AF37; /* Gold */
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        /* Estilização customizada da Scrollbar para um look premium */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #121212;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 4px;
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body { background: #050505; color: #fff; overflow: hidden; }
+    .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F4E4B8 50%, #D4AF37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .neon-border { border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+    .slide-img { transition: transform 8s ease-out; }
+    .slide.active .slide-img { transform: scale(1.08); }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .floating-wa { animation: pulse-gold 2s infinite; }
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+      50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+    }
+    .admin-panel { backdrop-filter: blur(20px); }
+  </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
+<body class="font-sans antialiased">
 
-    <!-- Header / Controles de Layout -->
-    <header class="w-full max-w-4xl flex flex-col items-center mb-8 text-center">
-        <h1 class="font-display text-2xl md:text-4xl font-bold text-white mb-2 tracking-wide">
-            RESERVA <span class="text-gold">EXCLUSIVA</span>
-        </h1>
-        <p class="text-gray-400 font-sans text-sm md:text-base mb-8 max-w-lg">
-            Selecione o formato desejado para visualizar como a campanha imobiliária será exibida nas redes sociais.
-        </p>
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+    <div class="bg-card neon-border rounded-2xl p-8 max-w-md w-full shadow-neon-strong">
+      <h2 class="font-display text-3xl gold-gradient mb-2 text-center">Área Administrativa</h2>
+      <p class="text-gray-400 text-center mb-6 text-sm">Acesso restrito para gestão de conteúdo</p>
+      <form id="login-form" class="space-y-4">
+        <input type="email" id="login-email" placeholder="E-mail" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 focus:border-gold focus:outline-none" required>
+        <input type="password" id="login-password" placeholder="Senha" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 focus:border-gold focus:outline-none" required>
+        <button type="submit" class="w-full bg-gold text-black font-semibold py-3 rounded-lg hover:bg-goldLight transition">Entrar</button>
+      </form>
+      <button onclick="mockGoogleLogin()" class="w-full mt-3 border border-gold text-gold py-3 rounded-lg hover:bg-gold/10 transition text-sm">Continuar com Google</button>
+      <p class="text-xs text-gray-500 mt-4 text-center">Demo: admin@imovel.com / 123456</p>
+      <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    </div>
+  </div>
 
-        <!-- Toggle Formatos -->
-        <div class="inline-flex bg-dark rounded-full p-1 border border-gray-800 shadow-xl">
-            <button id="btn-feed" onclick="setFormat('feed')" class="px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 bg-gold text-darker shadow-lg">
-                <span class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-                    Feed (1:1)
-                </span>
-            </button>
-            <button id="btn-stories" onclick="setFormat('stories')" class="px-6 py-2 rounded-full font-medium text-sm text-gray-400 transition-all duration-300 hover:text-white">
-                <span class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 20H7V3h10v18z"/></svg>
-                    Stories (9:16)
-                </span>
-            </button>
+  <!-- ADMIN PANEL -->
+  <div id="admin-panel" class="fixed inset-0 bg-black/90 z-[90] hidden overflow-y-auto">
+    <div class="max-w-6xl mx-auto p-6 admin-panel">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="font-display text-3xl gold-gradient">Gestão de Slides & Contatos</h2>
+        <div class="flex gap-3">
+          <button onclick="saveSlides()" class="bg-gold text-black px-6 py-2 rounded-lg font-semibold">Salvar</button>
+          <button onclick="document.getElementById('admin-panel').classList.add('hidden')" class="border border-gold text-gold px-6 py-2 rounded-lg">Fechar</button>
         </div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Editor de Slides -->
+        <div>
+          <h3 class="text-xl mb-4 text-gold">Slides da Apresentação</h3>
+          <div id="slides-editor" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"></div>
+          <button onclick="addNewSlide()" class="mt-4 w-full border-2 border-dashed border-gold text-gold py-3 rounded-lg hover:bg-gold/10">+ Adicionar Novo Slide</button>
+        </div>
+        
+        <!-- Contatos -->
+        <div>
+          <h3 class="text-xl mb-4 text-gold">Contatos & Leads</h3>
+          <div id="contacts-list" class="space-y-3 text-sm"></div>
+          <div class="mt-6 p-4 bg-darker rounded-xl neon-border">
+            <h4 class="font-semibold mb-2">WhatsApp Flutuante</h4>
+            <p class="text-gray-400 text-xs">Configurado com os números dos corretores. Clique no botão dourado para contato direto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PRESENTATION -->
+  <div id="app" class="h-screen w-screen relative">
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-40 flex justify-between items-center p-4 md:p-6">
+      <div class="font-display text-2xl md:text-3xl gold-gradient tracking-wider">RESERVA EXCLUSIVA</div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleFormat()" id="format-btn" class="text-xs border border-gold/50 text-gold px-3 py-1.5 rounded-full hover:bg-gold/10">Feed 1:1</button>
+        <button onclick="document.getElementById('login-modal').classList.remove('hidden')" class="text-xs bg-gold/20 border border-gold text-gold px-3 py-1.5 rounded-full">Admin</button>
+      </div>
     </header>
 
-    <!-- CARROSSEL PRINCIPAL -->
-    <!-- Os placeholders de imagem refletem a estética pedida (Sala/Cozinha, Quarto/Banheiro, Escritório/Serviço) -->
-    <!-- Para usar em produção com as fotos enviadas, substitua a url() pelo caminho da imagem local/montagem -->
-    <div id="carousel-container" class="format-feed">
-        <div id="carousel-track">
-            
-            <!-- SLIDE 1 -->
-            <div class="carousel-slide active" style="background-image: url('images/sala.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center md:text-left z-10">
-                    <div class="text-gold text-xs font-bold tracking-[0.2em] uppercase mb-3">110m² - 2 Quartos + Escritório</div>
-                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-200">OPORTUNIDADE NO CENTRO</span>
-                    </h2>
-                    <div class="mt-2">
-                        <div class="inline-block bg-gold/20 border border-gold px-4 py-2 rounded mb-6 backdrop-blur-sm">
-                            <p class="font-sans text-gold font-bold text-sm md:text-base leading-relaxed">
-                                R$ 300.000,00 (Aberto a negociação)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 2 -->
-            <div class="carousel-slide" style="background-image: url('images/sala.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Convivência e Amplitude</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Sala ampla com varanda, perfeita para receber amigos.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 3 -->
-            <div class="carousel-slide" style="background-image: url('images/cozinha.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">O Coração da Casa</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Cozinha planejada e semimobiliada.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 4 -->
-            <div class="carousel-slide" style="background-image: url('images/cozinha_panorama.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Espaço de Sobra</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Visão panorâmica de uma cozinha feita para a sua rotina.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 5 -->
-            <div class="carousel-slide" style="background-image: url('images/quarto_ac.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Conforto e Descanso</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Um dos 2 amplos quartos do apartamento.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 6 -->
-            <div class="carousel-slide" style="background-image: url('images/quarto.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Ambientes Arejados</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Muita iluminação natural e ventilação.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 7 -->
-            <div class="carousel-slide" style="background-image: url('images/escritorio.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Versatilidade</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Escritório reversível ideal para seu Home Office.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 8 -->
-            <div class="carousel-slide" style="background-image: url('images/banheiro_grande.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Modernidade</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Banheiro principal com acabamento premium e box espaçoso.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 9 -->
-            <div class="carousel-slide" style="background-image: url('images/banheiro_escritorio.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Praticidade</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Segundo banheiro com excelente padrão de acabamento.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 10 -->
-            <div class="carousel-slide" style="background-image: url('images/corredor.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Distribuição Inteligente</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Privacidade preservada entre a área social e íntima.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 11 -->
-            <div class="carousel-slide" style="background-image: url('images/area_servico.jpg'); background-color: #1a1a1a;">
-                <div class="slide-overlay"></div>
-                <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-10 content-wrap text-center z-10">
-                    <h2 class="font-display text-3xl font-bold mb-2 text-white">Funcionalidade</h2>
-                    <p class="font-sans text-gray-300 text-sm md:text-base mb-8">Área de serviço muito espaçosa e isolada.</p>
-                </div>
-            </div>
-
-            <!-- SLIDE 12: CTA Final -->
-            <div class="carousel-slide" style="background-image: url('images/sala.jpg'); background-color: #1a1a1a;">
-                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm z-0"></div> <!-- Blur Extra para Leitura -->
-                <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-6 md:p-10 content-wrap z-10">
-                    <div class="border border-gold p-6 bg-black/60 backdrop-blur-md w-full max-w-sm rounded-xl">
-                        <div class="text-gold text-xs font-bold tracking-[0.1em] uppercase mb-2 leading-relaxed">
-                            R. Clodoaldo Freitas, 1060<br>Centro (Sul), Teresina - PI, 64000-360
-                        </div>
-                        <h2 class="font-display text-2xl md:text-3xl font-bold mb-2 text-white mt-4">
-                            AGENDE SUA <span class="text-gold">VISITA!</span>
-                        </h2>
-                        <p class="font-sans text-gray-300 text-sm leading-relaxed mx-auto mb-6">
-                            Segurança: Portaria facial e câmeras 24h.
-                        </p>
-                        <button class="w-full bg-gold text-darker font-bold py-3 px-4 uppercase text-xs tracking-wider hover:bg-yellow-400 transition-colors mb-4 rounded shadow-lg shadow-gold/20">
-                            Falar com o Corretor
-                        </button>
-                        <div class="text-sm text-gray-300 flex flex-col gap-2 mt-2">
-                            <span>Luane: <a href="tel:91985530230" class="text-gold font-bold hover:underline">91 9 8553-0230</a></span>
-                            <span>Tarcisio: <a href="tel:86981830140" class="text-gold font-bold hover:underline">86 9 8183-0140</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Controles: Setas -->
-        <button onclick="prevSlide()" class="nav-button absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full text-white z-20">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    <!-- Carousel Container - Dynamic Fullscreen -->
+    <div id="carousel-wrapper" class="absolute inset-0 flex items-center justify-center">
+      <div id="carousel-container" class="relative w-full h-full max-w-none transition-all duration-700">
+        <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-out"></div>
+        
+        <!-- Navigation -->
+        <button onclick="prevSlide()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-gold/30 text-gold flex items-center justify-center hover:bg-gold hover:text-black transition z-30">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         </button>
-        <button onclick="nextSlide()" class="nav-button absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full text-white z-20">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <button onclick="nextSlide()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 backdrop-blur border border-gold/30 text-gold flex items-center justify-center hover:bg-gold hover:text-black transition z-30">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </button>
 
-        <!-- Controles: Indicadores (Dots) -->
-        <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-1.5 z-20 flex-wrap px-8" id="dots-container">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
-            <div class="dot" onclick="goToSlide(3)"></div>
-            <div class="dot" onclick="goToSlide(4)"></div>
-            <div class="dot" onclick="goToSlide(5)"></div>
-            <div class="dot" onclick="goToSlide(6)"></div>
-            <div class="dot" onclick="goToSlide(7)"></div>
-            <div class="dot" onclick="goToSlide(8)"></div>
-            <div class="dot" onclick="goToSlide(9)"></div>
-            <div class="dot" onclick="goToSlide(10)"></div>
-            <div class="dot" onclick="goToSlide(11)"></div>
+        <!-- Dots -->
+        <div id="dots" class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-30"></div>
+      </div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div id="counter" class="absolute bottom-6 right-6 text-gold text-sm font-medium z-30"></div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/559185530230" target="_blank" class="floating-wa fixed bottom-6 left-6 z-50 w-14 h-14 bg-gold rounded-full flex items-center justify-center shadow-neon-strong hover:scale-110 transition">
+    <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Pre-loaded slides with all provided photos
+    const defaultSlides = [
+      { id: 1, image: 'images/sala.jpg', title: 'OPORTUNIDADE NO CENTRO', description: '110m² • 2 Quartos + Escritório • R$ 300.000 (Aberto a negociação)', highlight: true },
+      { id: 2, image: 'images/sala.jpg', title: 'Convivência e Amplitude', description: 'Sala ampla com varanda, perfeita para receber amigos e família.' },
+      { id: 3, image: 'images/cozinha.jpg', title: 'O Coração da Casa', description: 'Cozinha planejada e semimobiliada com excelente padrão de acabamento.' },
+      { id: 4, image: 'images/cozinha_panorama.jpg', title: 'Espaço de Sobra', description: 'Visão panorâmica de uma cozinha feita para a sua rotina diária.' },
+      { id: 5, image: 'images/quarto_ac.jpg', title: 'Conforto e Descanso', description: 'Um dos 2 amplos quartos do apartamento, com ótima ventilação.' },
+      { id: 6, image: 'images/quarto.jpg', title: 'Ambientes Arejados', description: 'Muita iluminação natural e ventilação em todos os ambientes.' },
+      { id: 7, image: 'images/escritorio.jpg', title: 'Versatilidade', description: 'Escritório reversível ideal para seu Home Office ou quarto extra.' },
+      { id: 8, image: 'images/banheiro_grande.jpg', title: 'Modernidade', description: 'Banheiro principal com acabamento premium e box espaçoso.' },
+      { id: 9, image: 'images/banheiro_escritorio.jpg', title: 'Praticidade', description: 'Segundo banheiro com excelente padrão de acabamento e funcionalidade.' },
+      { id: 10, image: 'images/corredor.jpg', title: 'Distribuição Inteligente', description: 'Privacidade preservada entre a área social e a área íntima.' },
+      { id: 11, image: 'images/area_servico.jpg', title: 'Funcionalidade', description: 'Área de serviço muito espaçosa e isolada, pronta para uso.' },
+      { id: 12, image: 'images/sala.jpg', title: 'AGENDE SUA VISITA!', description: 'R. Clodoaldo Freitas, 1060 • Centro (Sul), Teresina - PI • Portaria facial e câmeras 24h', cta: true },
+    ];
+
+    let slides = JSON.parse(localStorage.getItem('slides') || 'null') || defaultSlides;
+    let currentIndex = 0;
+    let isStories = false;
+    let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+
+    function renderCarousel() {
+      const track = document.getElementById('carousel-track');
+      const dots = document.getElementById('dots');
+      track.innerHTML = '';
+      dots.innerHTML = '';
+      
+      slides.forEach((slide, i) => {
+        const div = document.createElement('div');
+        div.className = `carousel-slide min-w-full h-full relative flex items-end ${i === currentIndex ? 'active' : ''}`;
+        div.innerHTML = `
+          <img src="${slide.image}" class="slide-img absolute inset-0 w-full h-full object-cover" alt="${slide.title}">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          <div class="relative z-10 p-6 md:p-12 w-full text-center md:text-left">
+            ${slide.highlight ? `<div class="text-gold text-xs md:text-sm font-bold tracking-[0.2em] uppercase mb-3">110m² • 2 Quartos + Escritório</div>` : ''}
+            <h2 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight ${slide.highlight ? 'gold-gradient' : ''}">${slide.title}</h2>
+            <p class="text-gray-200 text-sm md:text-lg max-w-xl mx-auto md:mx-0">${slide.description}</p>
+            ${slide.cta ? `
+              <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                <a href="https://wa.me/559185530230" class="bg-gold text-black font-bold py-3 px-6 rounded-lg hover:bg-goldLight transition">Falar com Luane</a>
+                <a href="https://wa.me/5586981830140" class="border border-gold text-gold font-bold py-3 px-6 rounded-lg hover:bg-gold/10 transition">Falar com Tarcisio</a>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        track.appendChild(div);
+
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-all ${i === currentIndex ? 'bg-gold w-6' : 'bg-white/40'}`;
+        dot.onclick = () => goToSlide(i);
+        dots.appendChild(dot);
+      });
+
+      updatePosition();
+      document.getElementById('counter').textContent = `${currentIndex + 1} / ${slides.length}`;
+    }
+
+    function updatePosition() {
+      const track = document.getElementById('carousel-track');
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      document.querySelectorAll('.carousel-slide').forEach((el, i) => {
+        el.classList.toggle('active', i === currentIndex);
+      });
+      document.querySelectorAll('#dots button').forEach((el, i) => {
+        el.className = `w-2 h-2 rounded-full transition-all ${i === currentIndex ? 'bg-gold w-6' : 'bg-white/40'}`;
+      });
+    }
+
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; renderCarousel(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; renderCarousel(); }
+    function goToSlide(i) { currentIndex = i; renderCarousel(); }
+
+    function toggleFormat() {
+      isStories = !isStories;
+      const btn = document.getElementById('format-btn');
+      const container = document.getElementById('carousel-container');
+      if (isStories) {
+        btn.textContent = 'Stories 9:16';
+        container.classList.add('max-w-md', 'mx-auto');
+        container.style.aspectRatio = '9/16';
+        container.style.height = 'auto';
+        container.style.maxHeight = '90vh';
+      } else {
+        btn.textContent = 'Feed 1:1';
+        container.classList.remove('max-w-md', 'mx-auto');
+        container.style.aspectRatio = '';
+        container.style.height = '100%';
+        container.style.maxHeight = '';
+      }
+    }
+
+    // Login
+    document.getElementById('login-form').onsubmit = (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const pass = document.getElementById('login-password').value;
+      if (email === 'admin@imovel.com' && pass === '123456') {
+        document.getElementById('login-modal').classList.add('hidden');
+        openAdmin();
+      } else {
+        alert('Credenciais inválidas. Use o demo.');
+      }
+    };
+
+    function mockGoogleLogin() {
+      document.getElementById('login-modal').classList.add('hidden');
+      openAdmin();
+    }
+
+    function openAdmin() {
+      document.getElementById('admin-panel').classList.remove('hidden');
+      renderAdmin();
+    }
+
+    function renderAdmin() {
+      const editor = document.getElementById('slides-editor');
+      editor.innerHTML = slides.map((s, i) => `
+        <div class="bg-darker p-4 rounded-xl border border-gray-800">
+          <div class="flex gap-3">
+            <img src="${s.image}" class="w-16 h-16 object-cover rounded">
+            <div class="flex-1 space-y-2">
+              <input value="${s.title}" onchange="slides[${i}].title=this.value" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-sm">
+              <textarea onchange="slides[${i}].description=this.value" class="w-full bg-black border border-gray-700 rounded px-2 py-1 text-xs" rows="2">${s.description}</textarea>
+            </div>
+            <button onclick="slides.splice(${i},1); renderAdmin();" class="text-red-400 text-xs">✕</button>
+          </div>
         </div>
-    </div>
+      `).join('');
 
-    <!-- Rodapé Discreto -->
-    <div class="mt-8 text-center text-xs text-gray-600 font-sans">
-        Apresentação de Marketing Imobiliário &copy; 2026<br>
-        Imagens ilustrativas. Substituir por montagens locais conforme campanha.
-    </div>
+      document.getElementById('contacts-list').innerHTML = contacts.length ? contacts.map(c => `
+        <div class="bg-darker p-3 rounded-lg border border-gray-800 text-xs">
+          <strong>${c.name || 'Lead'}</strong> • ${c.email || ''} • ${c.phone || ''}<br>
+          <span class="text-gray-400">${c.message || ''}</span>
+        </div>
+      `).join('') : '<p class="text-gray-500">Nenhum contato registrado ainda.</p>';
+    }
 
-    <!-- Lógica de Funcionamento -->
-    <script>
-        // Lógica do Formato (Feed x Stories)
-        function setFormat(format) {
-            const container = document.getElementById('carousel-container');
-            const btnFeed = document.getElementById('btn-feed');
-            const btnStories = document.getElementById('btn-stories');
+    function addNewSlide() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          slides.push({
+            id: Date.now(),
+            image: reader.result,
+            title: 'Novo Ambiente',
+            description: 'Descrição do ambiente'
+          });
+          renderAdmin();
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
 
-            // Reset estilos dos botões
-            btnFeed.className = 'px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 text-gray-400 hover:text-white';
-            btnStories.className = 'px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 text-gray-400 hover:text-white';
+    function saveSlides() {
+      localStorage.setItem('slides', JSON.stringify(slides));
+      renderCarousel();
+      alert('Slides salvos com sucesso! (armazenados localmente para esta sessão/demo)');
+    }
 
-            if (format === 'feed') {
-                container.className = 'format-feed';
-                btnFeed.className = 'px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 bg-gold text-darker shadow-lg';
-            } else {
-                container.className = 'format-stories';
-                btnStories.className = 'px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 bg-gold text-darker shadow-lg';
-            }
-            
-            // Recalcula a posição do slide para alinhar após redimensionamento
-            setTimeout(() => updateCarousel(), 600); // 600ms é o tempo da transição CSS
-        }
+    // Keyboard & Touch
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
 
-        // Lógica do Carrossel
-        let currentIndex = 0;
-        const totalSlides = 12;
-        const track = document.getElementById('carousel-track');
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.dot');
+    let touchStartX = 0;
+    document.getElementById('carousel-track').addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+    document.getElementById('carousel-track').addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+    });
 
-        function updateCarousel() {
-            // Move a trilha (track) para exibir a imagem correta
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    // Init
+    renderCarousel();
 
-            // Atualiza o visual dos dots
-            dots.forEach((dot, index) => {
-                if (index === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-
-            // Adiciona classe 'active' para as animações de texto entrarem no momento certo
-            slides.forEach((slide, index) => {
-                if(index === currentIndex){
-                    slide.classList.add('active');
-                } else {
-                    // Remove para reiniciar a animação quando o usuário voltar pro slide
-                    slide.classList.remove('active');
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(index) {
-            currentIndex = index;
-            updateCarousel();
-        }
-        
-        // Suporte para swiping em mobile (Touch events)
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        track.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        
-        track.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-        
-        function handleSwipe() {
-            const threshold = 50; // Mínimo de pixels de arraste para ser considerado um swipe
-            if (touchStartX - touchEndX > threshold) {
-                nextSlide();
-            }
-            if (touchEndX - touchStartX > threshold) {
-                prevSlide();
-            }
-        }
-    </script>
+    // Dynamic resize
+    window.addEventListener('resize', () => {
+      // Force reflow for perfect rendering
+      const container = document.getElementById('carousel-container');
+      container.style.height = window.innerHeight + 'px';
+    });
+    window.dispatchEvent(new Event('resize'));
+  </script>
 </body>
 </html>
