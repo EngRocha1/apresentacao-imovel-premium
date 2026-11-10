@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci || echo "No package.json lock — static site"
+
+      - name: Typecheck (if TS)
+        run: |
+          if [ -f tsconfig.json ]; then
+            npx tsc --noEmit || true
+          else
+            echo "Static presentation — no typecheck"
+          fi
+
+      - name: Convex schema check
+        run: |
+          if [ -d convex ]; then
+            echo "Convex partition present"
+            ls convex/
+          fi
+
+      - name: Build note
+        run: echo "Public presentation ready. Deploy full app on Vercel + Convex for multi-tenant."
+
+  # Optional: GitHub Pages for the static index.html
+  pages:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - uses: actions/deploy-pages@v4

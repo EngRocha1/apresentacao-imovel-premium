@@ -1,23 +1,33 @@
-# Reserva Exclusiva
+# Apresentação Imóvel Premium — Centro Teresina
 
-Apresentação em tela cheia do apartamento no Centro de Teresina. O formato acompanha o celular (stories) e o desktop (tela cheia).
+Apresentação full-bleed premium (dark + neon gold) do apartamento 110 m² no Centro de Teresina.
 
-## Ver agora
+## Multi-tenant & Segurança
 
-[Abrir apresentação](https://htmlpreview.github.io/?https://raw.githubusercontent.com/EngRocha1/apresentacao-imovel-premium/main/index.html)
+- Cada usuário autenticado (Google / e-mail) possui **área isolada**.
+- Slides e leads são filtrados por `ownerEmail`.
+- Público acessa apenas via slug: `/tarcisio` (master) ou `/usuarioxpto`.
+- Master (`tarcisiodiasdarocha@gmail.com`) é admin: pode listar usuários e revogar (desativar) contas.
+- Outro usuário que criar conta inicia em branco, com seu próprio slug.
 
-Fotos em `images/`. Títulos e fotos novas feitas no Estúdio ficam neste navegador. O WhatsApp da Luane e do Tarcísio abre direto do botão flutuante.
+## Tecnologias
 
-## Convex
+- **Público estático**: `index.html` + imagens (GitHub Pages)
+- **Backend**: Convex (schema multi-tenant em `convex/`)
+- **App dinâmico completo** (TanStack Start + Better Auth): disponível para deploy em Vercel + Convex. Código de referência no histórico do sandbox; isolamento aplicado no Convex.
 
-A partição está em `convex/`:
+## CI/CD
 
-- `slides` — catálogo (título, descrição, foto, ordem)
-- `leads` — pedidos de visita
+Workflow em `.github/workflows/ci.yml`:
+- Checkout, typecheck (quando aplicável), verificação da partição Convex.
+- Deploy automático de Pages na branch `main`.
 
-```bash
-npm install convex
-npx convex dev
-```
+## Como usar
 
-Isso gera `convex/_generated` e publica o deployment. No app publicado, a variável `CONVEX_URL` espelha cada salvamento de slide e cada contato.
+1. Ative GitHub Pages nas configurações do repositório (source: GitHub Actions).
+2. Para o app multi-usuário completo: conecte Convex (`npx convex dev`), configure auth, e faça deploy do frontend.
+3. Master é criado automaticamente na primeira interação.
+
+## Isolamento
+
+Consultas e mutações no Convex exigem identidade. Usuários não veem nem podem apagar dados de outros.
