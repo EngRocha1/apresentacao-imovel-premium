@@ -2,6 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 const MASTER_EMAIL = "tarcisiodiasdarocha@gmail.com";
+const MASTER_SLUG = "domricardo";
 
 export const ensureMaster = mutation({
   args: {},
@@ -14,7 +15,7 @@ export const ensureMaster = mutation({
     return await ctx.db.insert("users", {
       email: MASTER_EMAIL,
       name: "Tarcísio Dias da Rocha",
-      slug: "tarcisio",
+      slug: MASTER_SLUG,
       role: "admin",
       active: true,
       createdAt: Date.now(),
