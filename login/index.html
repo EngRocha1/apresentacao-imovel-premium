@@ -1,29 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Entrar · Reserva Exclusiva</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520&family=Outfit:wght@380;520&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#070705; --fg:#f6f1e4; --gold:#e0c36a; --surface:#14140f; --line:rgba(224,195,106,.35); }
-    body { margin:0; min-height:100dvh; background:var(--bg); color:var(--fg); font-family:Outfit,sans-serif; display:grid; place-items:center; }
-    .card { width:min(100%,22rem); background:var(--surface); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem; }
-    h1 { font-family:Fraunces,serif; margin:.3rem 0 1rem; }
-    input, button { width:100%; min-height:44px; border-radius:1rem; margin-bottom:.7rem; }
-    input { background:var(--bg); border:1px solid var(--line); color:var(--fg); padding:.6rem .8rem; }
-    button { background:var(--gold); color:#1a1404; border:0; font-weight:520; cursor:pointer; }
-    a { color:var(--gold); text-decoration:none; font-size:.85rem; }
+    :root { --bg:#070705; --fg:#f6f1e4; --gold:#e0c36a; --muted:#c4b79a; --surface:#14140f; --line:rgba(224,195,106,.35); }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100dvh; background:var(--bg); color:var(--fg); font-family:Outfit,sans-serif; }
+    .grid { display:grid; min-height:100dvh; }
+    @media (min-width:900px) { .grid { grid-template-columns:1fr 1fr; } }
+    .photo { position:relative; display:none; overflow:hidden; }
+    @media (min-width:900px) { .photo { display:block; } }
+    .photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .photo .veil { position:absolute; inset:0; background:linear-gradient(to top,#070705 0%,rgba(7,7,5,.35) 50%,rgba(7,7,5,.1) 100%); }
+    .photo .copy { position:absolute; bottom:2.5rem; left:2.5rem; max-width:22rem; }
+    .photo h1 { font-family:Fraunces,serif; font-size:3rem; margin:.3rem 0 0; }
+    .form-side { display:flex; align-items:center; justify-content:center; padding:2rem 1.25rem; }
+    .box { width:100%; max-width:26rem; }
+    .kicker { letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-size:.72rem; }
+    h2 { font-family:Fraunces,serif; font-size:2.4rem; margin:.4rem 0 .5rem; }
+    .muted { color:var(--muted); font-size:.9rem; line-height:1.5; }
+    .btn { width:100%; min-height:48px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); margin-top:.6rem; cursor:pointer; font-size:.95rem; }
+    .btn.gold { background:var(--gold); color:#1a1404; border:0; font-weight:520; }
+    label { display:block; margin-top:1rem; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+    input { width:100%; min-height:48px; margin-top:.3rem; border-radius:1rem; border:1px solid var(--line); background:var(--surface); color:var(--fg); padding:.6rem .9rem; }
+    .toggle { margin-top:1rem; background:none; border:0; color:var(--gold); cursor:pointer; font-size:.85rem; }
+    a.back { color:var(--gold); font-size:.8rem; text-decoration:none; }
   </style>
 </head>
 <body>
-  <form class="card" onsubmit="event.preventDefault(); alert('Login estático de demonstração. Use o app completo para autenticação real.');">
-    <p style="letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-size:.7rem">Reserva Exclusiva</p>
-    <h1>Entrar</h1>
-    <input type="email" placeholder="E-mail" required>
-    <input type="password" placeholder="Senha" required>
-    <button type="submit">Entrar</button>
-    <a href="../">← Voltar</a>
-  </form>
+  <div class="grid">
+    <section class="photo">
+      <img src="../domricardo/images/sala.jpg" alt="">
+      <div class="veil"></div>
+      <div class="copy">
+        <p class="kicker">Estúdio</p>
+        <h1>A reserva, do seu jeito.</h1>
+      </div>
+    </section>
+    <section class="form-side">
+      <div class="box">
+        <a class="back" href="../">← Reserva Exclusiva</a>
+        <h2 id="heading">Entrar no estúdio</h2>
+        <p class="muted">Google ou e-mail. Quem entra edita fotos, títulos e vê os contatos da visita.</p>
+
+        <button class="btn" type="button" onclick="loginGoogle()">Continuar com Google</button>
+        <button class="btn" type="button" onclick="loginGoogle()">Continuar com X</button>
+
+        <form id="form" onsubmit="return onSubmit(event)">
+          <div id="name-wrap" style="display:none">
+            <label>Nome<input name="name" id="name"></label>
+          </div>
+          <label>E-mail<input type="email" name="email" required></label>
+          <label>Senha<input type="password" name="password" required minlength="6"></label>
+          <button class="btn gold" type="submit" id="submit">Entrar</button>
+        </form>
+        <button class="toggle" type="button" id="toggle" onclick="toggleMode()">Criar com nome, e-mail e senha</button>
+        <p id="msg" class="muted" style="margin-top:1rem"></p>
+      </div>
+    </section>
+  </div>
+  <script>
+    let mode = "in";
+    function toggleMode() {
+      mode = mode === "in" ? "up" : "in";
+      document.getElementById("heading").textContent = mode === "up" ? "Criar acesso" : "Entrar no estúdio";
+      document.getElementById("submit").textContent = mode === "up" ? "Cadastrar" : "Entrar";
+      document.getElementById("toggle").textContent = mode === "up" ? "Já tenho acesso" : "Criar com nome, e-mail e senha";
+      document.getElementById("name-wrap").style.display = mode === "up" ? "block" : "none";
+    }
+    function loginGoogle() {
+      // Real Google auth lives in the dynamic app. This static page mirrors the UX.
+      document.getElementById("msg").textContent = "Redirecionando para o login Google do estúdio…";
+      location.href = "https://lotus-grove-spruce-swift.grok.me/login";
+    }
+    function onSubmit(e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const email = String(data.get("email") || "");
+      // Demo gate: any email creates a local session for this static demo
+      localStorage.setItem("reserva-session", JSON.stringify({ email, at: Date.now() }));
+      location.href = "../admin/";
+      return false;
+    }
+  </script>
 </body>
 </html>
