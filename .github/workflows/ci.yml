@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node (no cache — static site)
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -21,19 +21,14 @@ jobs:
       - name: Validate structure
         run: |
           echo "=== Validating repository ==="
-          test -f index.html && echo "OK: index.html present"
-          test -d images && echo "OK: images/ present"
-          test -d convex && echo "OK: convex/ present"
-          ls -la convex/
-          echo "Multi-tenant schema and functions ready."
+          test -f index.html && echo "OK: index.html"
+          test -d images && echo "OK: images/"
+          test -d convex && echo "OK: convex/"
+          ls convex/
+          echo "Multi-tenant ready."
 
-      - name: Convex syntax check (optional)
-        run: |
-          if command -v npx >/dev/null; then
-            echo "Convex files present — ready for deployment."
-          fi
-
-  # GitHub Pages deploy (requires Pages enabled once in repo Settings → Pages → GitHub Actions)
+  # Pages deploy — only runs if Pages is already enabled.
+  # Enable once manually: Settings → Pages → Source = GitHub Actions
   pages:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -41,20 +36,21 @@ jobs:
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure Pages
+        id: configure
+        continue-on-error: true
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: steps.configure.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "."
 
       - name: Deploy to GitHub Pages
-        id: deployment
+        if: steps.configure.outcome == 'success'
         uses: actions/deploy-pages@v4
