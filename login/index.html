@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar · Reserva Exclusiva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520&family=Outfit:wght@380;520&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#070705; --fg:#f6f1e4; --gold:#e0c36a; --surface:#14140f; --line:rgba(224,195,106,.35); }
+    body { margin:0; min-height:100dvh; background:var(--bg); color:var(--fg); font-family:Outfit,sans-serif; display:grid; place-items:center; }
+    .card { width:min(100%,22rem); background:var(--surface); border:1px solid var(--line); border-radius:1.5rem; padding:1.5rem; }
+    h1 { font-family:Fraunces,serif; margin:.3rem 0 1rem; }
+    input, button { width:100%; min-height:44px; border-radius:1rem; margin-bottom:.7rem; }
+    input { background:var(--bg); border:1px solid var(--line); color:var(--fg); padding:.6rem .8rem; }
+    button { background:var(--gold); color:#1a1404; border:0; font-weight:520; cursor:pointer; }
+    a { color:var(--gold); text-decoration:none; font-size:.85rem; }
+  </style>
+</head>
+<body>
+  <form class="card" onsubmit="event.preventDefault(); alert('Login estático de demonstração. Use o app completo para autenticação real.');">
+    <p style="letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-size:.7rem">Reserva Exclusiva</p>
+    <h1>Entrar</h1>
+    <input type="email" placeholder="E-mail" required>
+    <input type="password" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+    <a href="../">← Voltar</a>
+  </form>
+</body>
+</html>
