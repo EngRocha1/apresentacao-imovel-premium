@@ -3,251 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Reserva Exclusiva</title>
+  <title>Reserva Exclusiva · /domricardo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520&family=Outfit:wght@380;520&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #070705;
-      --fg: #f6f1e4;
-      --muted: #c4b79a;
-      --gold: #e0c36a;
-      --line: rgba(224, 195, 106, 0.35);
-      --surface: #14140f;
-    }
+    :root { --bg:#070705; --fg:#f6f1e4; --muted:#c4b79a; --gold:#e0c36a; --line:rgba(224,195,106,.35); --surface:#14140f; }
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font-family: Outfit, sans-serif; }
-    button, a { font: inherit; color: inherit; }
-    button { cursor: pointer; }
-    #stage { position: relative; height: 100dvh; width: 100%; overflow: hidden; }
-    #stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .veil { position: absolute; inset: 0; background: linear-gradient(to top, #070705 0%, rgba(7,7,5,.55) 42%, rgba(7,7,5,.12) 100%); }
-    .copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 1.25rem 1.25rem 6.5rem; max-width: 46rem; }
-    .kicker { letter-spacing: .28em; text-transform: uppercase; color: var(--gold); font-size: .72rem; margin: 0 0 .6rem; }
-    h1 { font-family: Fraunces, serif; font-weight: 520; font-size: clamp(2.3rem, 6vw, 4.6rem); line-height: 1.02; margin: 0 0 .7rem; }
-    .desc { margin: 0; max-width: 38rem; line-height: 1.5; font-size: 1.05rem; }
-    .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.1rem; }
-    .gold, .ghost {
-      min-height: 44px; border-radius: 999px; padding: 0 1.1rem; display: inline-flex; align-items: center; text-decoration: none;
-    }
-    .gold { background: var(--gold); color: #1a1404; border: 0; font-weight: 520; }
-    .ghost { background: transparent; border: 1px solid var(--line); }
-    header.bar, .nav, .dots, .wa, .sheet, #studio {
-      position: absolute; z-index: 5;
-    }
-    header.bar { top: 0; left: 0; right: 0; display: flex; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.1rem 0; }
-    .brand small { display: block; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); font-size: .68rem; }
-    .brand strong { font-family: Fraunces, serif; font-size: 1.45rem; font-weight: 520; }
-    .bar-actions { display: flex; gap: .5rem; align-items: center; }
-    .chip { min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: rgba(7,7,5,.45); backdrop-filter: blur(8px); padding: 0 .8rem; }
-    .nav { top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line); background: rgba(7,7,5,.45); }
-    .nav.prev { left: .7rem; } .nav.next { right: .7rem; }
-    .dots { left: 0; right: 0; bottom: 1.2rem; display: flex; justify-content: center; gap: .35rem; }
-    .dots button { height: 6px; width: 6px; border: 0; border-radius: 99px; background: rgba(246,241,228,.35); padding: 0; }
-    .dots button.on { width: 24px; background: var(--gold); }
-    .wa { left: 1rem; bottom: 1rem; width: 56px; height: 56px; border-radius: 999px; border: 0; background: var(--gold); color: #1a1404; font-weight: 520; }
-    .wa-menu { position: absolute; left: 1rem; bottom: 4.6rem; width: 15rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1rem; padding: .4rem; display: none; }
-    .wa-menu a { display: block; text-decoration: none; padding: .7rem .8rem; border-radius: .7rem; }
-    .sheet, #studio { inset: 0; background: rgba(7,7,5,.62); display: none; place-items: end center; padding: 1rem; }
-    .panel { width: min(100%, 28rem); background: var(--surface); border: 1px solid var(--line); border-radius: 1.4rem; padding: 1.2rem; }
-    label { display: grid; gap: .3rem; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: .7rem; }
-    input, textarea { min-height: 44px; border-radius: 1rem; border: 1px solid var(--line); background: var(--bg); color: var(--fg); padding: .6rem .8rem; text-transform: none; letter-spacing: 0; font-size: .95rem; }
-    #studio { overflow: auto; place-items: start center; }
-    #studio .panel { width: min(100%, 52rem); margin: 2rem auto; }
-    .slide-edit { display: grid; grid-template-columns: 92px 1fr; gap: .7rem; margin-bottom: .8rem; }
-    .slide-edit img { width: 92px; height: 92px; object-fit: cover; border-radius: .8rem; }
-    .progress { position: absolute; top: 0; left: 0; height: 3px; background: var(--gold); z-index: 6; }
-    @media (max-width: 720px) {
-      .copy { padding-bottom: 7.2rem; }
-    }
+    html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); font-family:Outfit,sans-serif; }
+    button, a { font:inherit; color:inherit; }
+    button { cursor:pointer; }
+    #stage { position:relative; height:100dvh; width:100%; overflow:hidden; background:#111; }
+    #stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .veil { position:absolute; inset:0; background:linear-gradient(to top, #070705 0%, rgba(7,7,5,.45) 50%, rgba(7,7,5,.08) 100%); pointer-events:none; }
+    .copy { position:absolute; left:0; right:0; bottom:0; z-index:2; padding:1.25rem 1.25rem 6.5rem; max-width:46rem; }
+    .kicker { letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-size:.72rem; margin:0 0 .6rem; }
+    h1 { font-family:Fraunces,serif; font-weight:520; font-size:clamp(2.2rem,5.5vw,4.4rem); line-height:1.02; margin:0 0 .7rem; }
+    .desc { margin:0; max-width:38rem; line-height:1.5; font-size:1.05rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.1rem; }
+    .gold, .ghost { min-height:44px; border-radius:999px; padding:0 1.1rem; display:inline-flex; align-items:center; text-decoration:none; }
+    .gold { background:var(--gold); color:#1a1404; border:0; font-weight:520; }
+    .ghost { background:transparent; border:1px solid var(--line); }
+    header.bar, .nav, .dots, .wa { position:absolute; z-index:5; }
+    header.bar { top:0; left:0; right:0; display:flex; justify-content:space-between; gap:1rem; padding:1.1rem 1.1rem 0; }
+    .brand small { display:block; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-size:.68rem; }
+    .brand strong { font-family:Fraunces,serif; font-size:1.45rem; font-weight:520; }
+    .nav { top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:999px; border:1px solid var(--line); background:rgba(7,7,5,.45); }
+    .nav.prev { left:.7rem; } .nav.next { right:.7rem; }
+    .dots { left:0; right:0; bottom:1.2rem; display:flex; justify-content:center; gap:.35rem; }
+    .dots button { height:6px; width:6px; border:0; border-radius:99px; background:rgba(246,241,228,.35); padding:0; }
+    .dots button.on { width:24px; background:var(--gold); }
+    .wa { left:1rem; bottom:1rem; width:56px; height:56px; border-radius:999px; border:0; background:var(--gold); color:#1a1404; font-weight:520; }
   </style>
 </head>
 <body>
   <div id="stage">
-    <div class="progress" id="progress"></div>
-    <img id="photo" alt="" src="images/sala.jpg">
+    <img id="photo" alt="Sala" src="images/sala.jpg">
     <div class="veil"></div>
     <header class="bar">
-      <div class="brand"><small>Centro · Teresina</small><strong>Reserva Exclusiva</strong></div>
-      <div class="bar-actions">
-        <button class="chip" id="frame" type="button">Tela cheia</button>
-        <button class="chip" id="open-studio" type="button">Estúdio</button>
-      </div>
+      <div class="brand"><small>Centro · Teresina · /domricardo</small><strong>Reserva Exclusiva</strong></div>
     </header>
     <div class="copy">
-      <p class="kicker" id="kicker"></p>
-      <h1 id="title"></h1>
-      <p class="desc" id="desc"></p>
+      <p class="kicker" id="kicker">110 m² · Centro Sul</p>
+      <h1 id="title">Oportunidade no Centro</h1>
+      <p class="desc" id="desc">110 m² · 2 quartos + escritório. R$ 300.000, aberto a negociação.</p>
       <div class="actions">
-        <button class="gold" id="open-contact" type="button">Agendar visita</button>
-        <a class="ghost" id="wa-main" target="_blank" rel="noreferrer">WhatsApp</a>
+        <a class="gold" href="https://wa.me/559185530230?text=Ol%C3%A1%2C%20vi%20a%20Reserva%20Exclusiva%20no%20Centro%20e%20quero%20agendar%20uma%20visita." target="_blank" rel="noreferrer">Agendar visita</a>
+        <a class="ghost" href="https://wa.me/5586981830140?text=Ol%C3%A1%2C%20vi%20a%20Reserva%20Exclusiva%20no%20Centro%20e%20quero%20agendar%20uma%20visita." target="_blank" rel="noreferrer">WhatsApp</a>
       </div>
     </div>
     <button class="nav prev" id="prev" type="button" aria-label="Anterior">‹</button>
     <button class="nav next" id="next" type="button" aria-label="Próximo">›</button>
     <div class="dots" id="dots"></div>
-    <div class="wa-menu" id="wa-menu">
-      <a id="wa-luane" target="_blank" rel="noreferrer">Luane · 91 98553-0230</a>
-      <a id="wa-tarcisio" target="_blank" rel="noreferrer">Tarcísio · 86 98183-0140</a>
-    </div>
-    <button class="wa" id="wa" type="button" aria-label="WhatsApp">WA</button>
+    <button class="wa" type="button" aria-label="WhatsApp" onclick="location.href='https://wa.me/559185530230'">WA</button>
   </div>
-
-  <div class="sheet" id="contact">
-    <form class="panel" id="contact-form">
-      <p class="kicker">Visita</p>
-      <h2 style="font-family:Fraunces,serif;font-size:2rem;margin:.2rem 0 1rem">Falar com a reserva</h2>
-      <label>Nome<input name="name" required></label>
-      <label>WhatsApp<input name="phone" required></label>
-      <label>Mensagem<textarea name="message" rows="3"></textarea></label>
-      <button class="gold" type="submit">Enviar no WhatsApp</button>
-      <button class="ghost" type="button" id="close-contact" style="margin-top:.6rem">Fechar</button>
-    </form>
-  </div>
-
-  <div id="studio">
-    <div class="panel">
-      <p class="kicker">Estúdio</p>
-      <h2 style="font-family:Fraunces,serif;margin-top:0">Fotos, títulos e descrição</h2>
-      <p id="studio-note" style="color:var(--muted)"></p>
-      <div id="editor"></div>
-      <form id="new-slide">
-        <h3 style="font-family:Fraunces,serif">Nova foto</h3>
-        <label>Título<input name="title" required></label>
-        <label>Descrição<textarea name="description" required></textarea></label>
-        <label>Foto<input name="photo" type="file" accept="image/*" required></label>
-        <button class="gold" type="submit">Publicar</button>
-      </form>
-      <button class="ghost" type="button" id="close-studio" style="margin-top:.8rem">Voltar à apresentação</button>
-    </div>
-  </div>
-
   <script>
-    const GREET = encodeURIComponent("Olá, vi a Reserva Exclusiva no Centro e quero agendar uma visita.");
-    const waLink = (phone) => `https://wa.me/${phone}?text=${GREET}`;
-    const seed = [
-      ["Oportunidade no Centro", "110 m² · 2 quartos + escritório. R$ 300.000, aberto a negociação.", "images/sala.jpg", true],
-      ["Convivência e amplitude", "Sala ampla com varanda, luz de fim de tarde e espaço para receber.", "images/sala.jpg", false],
-      ["O coração da casa", "Cozinha planejada, semimobiliada, pronta para a rotina.", "images/cozinha.jpg", false],
-      ["Espaço de sobra", "Bancada em L, forno e circulação larga entre o fogão e a mesa.", "images/cozinha_panorama.jpg", false],
-      ["Conforto e descanso", "Quarto com saída para a área externa e ponto de ar-condicionado.", "images/quarto_ac.jpg", false],
-      ["Ambientes arejados", "Janela alta, piso claro e ventilação cruzada.", "images/quarto.jpg", false],
-      ["Versatilidade", "Escritório com divisória de vidro. Vira quarto ou home office.", "images/escritorio.jpg", false],
-      ["Modernidade", "Banheiro principal com box amplo, espelho longo e bancada escura.", "images/banheiro_grande.jpg", false],
-      ["Praticidade", "Segundo banheiro, acabamento alinhado ao principal.", "images/banheiro_escritorio.jpg", false],
-      ["Distribuição inteligente", "Corredor curto. A área íntima fica reservada da sala.", "images/corredor.jpg", false],
-      ["Funcionalidade", "Área de serviço longa, isolada e com tanque instalado.", "images/area_servico.jpg", false],
-      ["Agende sua visita", "R. Clodoaldo Freitas, 1060 · Centro (Sul), Teresina. Portaria facial e câmeras 24h.", "images/sala.jpg", false]
-    ].map(([title, description, image, highlight], i) => ({ id: i + 1, title, description, image, highlight, cta: i === 11 }));
-
-    let slides = JSON.parse(localStorage.getItem("reserva-slides") || "null") || seed;
-    let index = 0;
+    const slides = [
+      { title:"Oportunidade no Centro", desc:"110 m² · 2 quartos + escritório. R$ 300.000, aberto a negociação.", img:"images/sala.jpg", kicker:"110 m² · Centro Sul" },
+      { title:"Convivência e amplitude", desc:"Sala ampla com varanda, luz de fim de tarde e espaço para receber.", img:"images/sala.jpg", kicker:"Reserva Exclusiva" },
+      { title:"O coração da casa", desc:"Cozinha planejada, semimobiliada, pronta para a rotina.", img:"images/cozinha.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Espaço de sobra", desc:"Bancada em L, forno e circulação larga.", img:"images/cozinha_panorama.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Conforto e descanso", desc:"Quarto com saída para a área externa e ponto de ar-condicionado.", img:"images/quarto_ac.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Ambientes arejados", desc:"Janela alta, piso claro e ventilação cruzada.", img:"images/quarto.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Versatilidade", desc:"Escritório com divisória de vidro. Vira quarto ou home office.", img:"images/escritorio.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Modernidade", desc:"Banheiro principal com box amplo e bancada escura.", img:"images/banheiro_grande.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Praticidade", desc:"Segundo banheiro, acabamento alinhado ao principal.", img:"images/banheiro_escritorio.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Distribuição inteligente", desc:"Corredor curto. A área íntima fica reservada da sala.", img:"images/corredor.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Funcionalidade", desc:"Área de serviço longa, isolada e com tanque instalado.", img:"images/area_servico.jpg", kicker:"Reserva Exclusiva" },
+      { title:"Agende sua visita", desc:"R. Clodoaldo Freitas, 1060 · Centro (Sul), Teresina. Portaria facial e câmeras 24h.", img:"images/sala.jpg", kicker:"Teresina · PI" }
+    ];
+    let i = 0;
     const photo = document.getElementById("photo");
     const title = document.getElementById("title");
     const desc = document.getElementById("desc");
     const kicker = document.getElementById("kicker");
     const dots = document.getElementById("dots");
-    const progress = document.getElementById("progress");
-    const frameBtn = document.getElementById("frame");
-
-    function fit() {
-      const portrait = innerHeight > innerWidth || innerWidth < 760;
-      frameBtn.textContent = portrait ? "Stories" : "Tela cheia";
-      photo.style.objectPosition = portrait ? "center center" : "center 40%";
-    }
     function render() {
-      const slide = slides[index];
-      if (!slide) return;
-      photo.src = slide.image;
-      title.textContent = slide.title;
-      desc.textContent = slide.description;
-      kicker.textContent = slide.highlight ? "110 m² · Centro Sul" : slide.cta ? "Teresina · PI" : "Reserva Exclusiva";
-      progress.style.width = ((index + 1) / slides.length * 100) + "%";
-      dots.innerHTML = slides.map((item, i) => `<button type="button" class="${i === index ? "on" : ""}" aria-label="${item.title}" data-i="${i}"></button>`).join("");
-      fit();
+      const s = slides[i];
+      photo.src = s.img;
+      title.textContent = s.title;
+      desc.textContent = s.desc;
+      kicker.textContent = s.kicker;
+      dots.innerHTML = slides.map((_, idx) => `<button type="button" class="${idx===i?'on':''}" data-i="${idx}"></button>`).join("");
     }
-    function go(next) { index = (next + slides.length) % slides.length; render(); }
-    document.getElementById("prev").onclick = () => go(index - 1);
-    document.getElementById("next").onclick = () => go(index + 1);
-    dots.onclick = (event) => {
-      const hit = event.target.closest("button");
-      if (hit) go(Number(hit.dataset.i));
-    };
-    addEventListener("keydown", (event) => {
-      if (event.key === "ArrowRight") go(index + 1);
-      if (event.key === "ArrowLeft") go(index - 1);
-    });
-    let startX = 0;
-    addEventListener("touchstart", (event) => { startX = event.changedTouches[0].screenX; }, { passive: true });
-    addEventListener("touchend", (event) => {
-      const delta = startX - event.changedTouches[0].screenX;
-      if (Math.abs(delta) > 48) go(delta > 0 ? index + 1 : index - 1);
-    }, { passive: true });
-    addEventListener("resize", fit);
-
-    const menu = document.getElementById("wa-menu");
-    document.getElementById("wa").onclick = () => { menu.style.display = menu.style.display === "block" ? "none" : "block"; };
-    document.getElementById("wa-main").href = waLink("559185530230");
-    document.getElementById("wa-luane").href = waLink("559185530230");
-    document.getElementById("wa-tarcisio").href = waLink("5586981830140");
-
-    const contact = document.getElementById("contact");
-    document.getElementById("open-contact").onclick = () => { contact.style.display = "grid"; };
-    document.getElementById("close-contact").onclick = () => { contact.style.display = "none"; };
-    document.getElementById("contact-form").onsubmit = (event) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      const text = encodeURIComponent(`Olá, sou ${data.get("name")}. ${data.get("message") || "Quero agendar uma visita."} WhatsApp: ${data.get("phone")}`);
-      const leads = JSON.parse(localStorage.getItem("reserva-leads") || "[]");
-      leads.unshift({ name: data.get("name"), phone: data.get("phone"), message: data.get("message") || "" });
-      localStorage.setItem("reserva-leads", JSON.stringify(leads.slice(0, 100)));
-      location.href = `https://wa.me/559185530230?text=${text}`;
-    };
-
-    const studio = document.getElementById("studio");
-    const editor = document.getElementById("editor");
-    function drawStudio() {
-      document.getElementById("studio-note").textContent = "As fotos desta página ficam na pasta images/. O backend Convex (pasta convex/) espelha o catálogo quando o deploy tem CONVEX_URL.";
-      editor.innerHTML = slides.map((slide) => `
-        <form class="slide-edit" data-id="${slide.id}">
-          <img src="${slide.image}" alt="">
-          <div>
-            <input name="title" value="${slide.title.replaceAll('"', """)}" style="width:100%;margin-bottom:.4rem">
-            <textarea name="description" style="width:100%">${slide.description}</textarea>
-            <button class="gold" type="submit">Salvar</button>
-          </div>
-        </form>`).join("");
-    }
-    editor.onclick = () => {};
-    editor.addEventListener("submit", (event) => {
-      const form = event.target;
-      if (!(form instanceof HTMLFormElement)) return;
-      event.preventDefault();
-      const id = Number(form.dataset.id);
-      const data = new FormData(form);
-      slides = slides.map((slide) => slide.id === id ? { ...slide, title: String(data.get("title")), description: String(data.get("description")) } : slide);
-      localStorage.setItem("reserva-slides", JSON.stringify(slides));
-      render();
-    });
-    document.getElementById("open-studio").onclick = () => { drawStudio(); studio.style.display = "block"; };
-    document.getElementById("close-studio").onclick = () => { studio.style.display = "none"; };
-    document.getElementById("new-slide").onsubmit = (event) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      const file = data.get("photo");
-      if (!(file instanceof File)) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        slides.push({ id: Date.now(), title: String(data.get("title")), description: String(data.get("description")), image: String(reader.result), highlight: false, cta: false });
-        localStorage.setItem("reserva-slides", JSON.stringify(slides));
-        event.currentTarget.reset();
-        go(slides.length - 1);
-        drawStudio();
-      };
-      reader.readAsDataURL(file);
-    };
-
+    function go(n) { i = (n + slides.length) % slides.length; render(); }
+    document.getElementById("prev").onclick = () => go(i-1);
+    document.getElementById("next").onclick = () => go(i+1);
+    dots.onclick = (e) => { const b = e.target.closest("button"); if (b) go(+b.dataset.i); };
     render();
   </script>
 </body>
