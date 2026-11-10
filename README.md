@@ -1,52 +1,23 @@
-# Reserva Exclusiva — Apresentação Premium de Imóvel
+# Reserva Exclusiva
 
-Apresentação imersiva e dinâmica para imóvel de alto padrão no Centro de Teresina.
+Apresentação em tela cheia do apartamento no Centro de Teresina. O formato acompanha o celular (stories) e o desktop (tela cheia).
 
-## Recursos
+## Ver agora
 
-- **Visualização dinâmica** que se adapta perfeitamente a qualquer tela (Feed 1:1 / Stories 9:16)
-- Tema dark com acentos dourados neon (sempre ativo)
-- Todas as fotos do imóvel já alocadas
-- Área administrativa com login (demo: `admin@imovel.com` / `123456`)
-- Edição de títulos e descrições + upload de novas fotos (salva localmente)
-- Botão flutuante de WhatsApp
-- Melhores práticas de marketing imobiliário de luxo
+[Abrir apresentação](https://htmlpreview.github.io/?https://raw.githubusercontent.com/EngRocha1/apresentacao-imovel-premium/main/index.html)
 
-## Visualizar
+Fotos em `images/`. Títulos e fotos novas feitas no Estúdio ficam neste navegador. O WhatsApp da Luane e do Tarcísio abre direto do botão flutuante.
 
-**[Abrir Apresentação](https://htmlpreview.github.io/?https://raw.githubusercontent.com/EngRocha1/apresentacao-imovel-premium/main/index.html)**
+## Convex
 
-## Próximo nível (Convex)
+A partição está em `convex/`:
 
-Para persistência real, autenticação Google e armazenamento de imagens:
+- `slides` — catálogo (título, descrição, foto, ordem)
+- `leads` — pedidos de visita
 
-1. Criar projeto no [Convex](https://convex.dev)
-2. Usar o schema abaixo em `convex/schema.ts`
-3. Integrar Convex Auth + File Storage
-
-```ts
-// convex/schema.ts (exemplo)
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
-
-export default defineSchema({
-  slides: defineTable({
-    title: v.string(),
-    description: v.string(),
-    imageId: v.optional(v.id("_storage")),
-    order: v.number(),
-  }).index("by_order", ["order"]),
-  contacts: defineTable({
-    name: v.string(),
-    email: v.string(),
-    phone: v.optional(v.string()),
-    message: v.optional(v.string()),
-  }),
-  users: defineTable({
-    name: v.string(),
-    email: v.string(),
-  }),
-});
+```bash
+npm install convex
+npx convex dev
 ```
 
-Repositório: https://github.com/EngRocha1/apresentacao-imovel-premium
+Isso gera `convex/_generated` e publica o deployment. No app publicado, a variável `CONVEX_URL` espelha cada salvamento de slide e cada contato.
