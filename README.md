@@ -1,28 +1,24 @@
-# Apresentação Imóvel Premium — Multi-tenant
+# Apresentação Imóvel Premium
 
-Apresentação full-bleed + áreas isoladas por tenant.
+Apresentação full-bleed de imóvel no Centro de Teresina.
 
-## Três áreas (padrão App Router)
+## Link público
 
-| Path | Área | Quem acessa |
-|------|------|-------------|
-| `/admin` | Admin Geral | Apenas `tarcisiodiasdarocha@gmail.com` |
-| `/{slug}` | AdminCliente (marca) | Dono da marca (ex: `/tarcisio`) |
-| `/{slug}/agendamentos` | Cliente do Cliente | Lead que agendou visita |
-
-- Cada AdminCliente tem um **slug único** (tabela `brands`).
-- Slides e leads são filtrados por `owner_email`.
-- Novo usuário começa em branco com seu próprio slug.
-
-## CI / Pages
-
-Workflow em `.github/workflows/ci.yml`.  
-O job `pages` só faz deploy se o GitHub Pages estiver habilitado (Settings → Pages → Source: GitHub Actions).
-
-Link público (após ativar):  
 https://engrocha1.github.io/apresentacao-imovel-premium/
+
+## Áreas (isolamento por tenant)
+
+| Path | Área | Descrição |
+|------|------|-----------|
+| `/admin` | Admin Geral | Gestão de usuários e políticas (acesso restrito) |
+| `/domricardo` | Marca atual | Postagem inicial (owner exclusivo) |
+| `/{slug}` | AdminCliente | Cada dono tem seu slug único |
+| `/{slug}/agendamentos` | Cliente do Cliente | Status das solicitações de visita |
+
+- Slides e leads filtrados por owner.
+- Slugs únicos verificados.
+- Novo usuário começa em branco.
 
 ## Convex
 
-Schema multi-tenant em `convex/` (`ownerEmail`, `slug`, roles).  
-Pronto para `npx convex dev`.
+Schema multi-tenant em `convex/`. Pronto para deploy.
